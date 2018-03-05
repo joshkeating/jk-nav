@@ -10,7 +10,7 @@
     "http://*/*",
     "https://*/*"
   ],
-"background": {},
+  "background": {},
   "page_action": {
 
   },
@@ -27,7 +27,7 @@
       ],
       "js": [""]
     }
-  ]
-  }
+   ]
+}
 
 
