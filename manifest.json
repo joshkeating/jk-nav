@@ -1,0 +1,33 @@
+{
+  "name": "Vimlike Nav Simple",
+  "version": "1.0",
+  "manifest_version": 1,
+  "description": "use to navigate websites",
+
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+"background": {},
+  "page_action": {
+
+  },
+  "icons": {
+
+  },
+  "options_page":"options.html",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [""]
+    }
+  ]
+  }
+
+
