@@ -10,7 +10,7 @@ module.exports = {
         vendor: ['moment', 'jquery']
     },
     output: {
-        path: path.join(__dirname, 'dist/js'),
+        path: path.join(__dirname, 'build/js'),
         filename: '[name].js'
     },
     module: {
