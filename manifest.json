@@ -8,12 +8,11 @@
   "permissions": [
     "tabs",
     "contextMenus",
-    "http://*/*",
-    "https://*/*"
+    "<all_urls>"
   ],
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": ["<all_urls>"],
       "js": ["<put js to inject here>"],
       "run_at": "document_start"
     }
