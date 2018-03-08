@@ -1,17 +1,34 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension allows the user to change the background color of the current page.",
+  "name": "jk-nav",
+  "description": "This extension allows the user to navigate defined webpages using keyboard shortcuts.",
   "version": "1.0",
 
-  "browser_action": {
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["<put js to inject here>"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "options_page":"options.html",
+
+  "background": {
+    "page": "background.html"
+  },
+
+  "page_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
     "default_title": "Change nav behavior for this site"
-  },
-  "permissions": [
-    "activeTab",
-    "storage"
-  ]
+  }
+
 }
