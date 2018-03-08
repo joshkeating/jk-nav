@@ -22,7 +22,8 @@
   "options_page":"options.html",
 
   "background": {
-    "page": "background.html"
+    "scripts": ["eventPage.js"],
+    "persistent": false
   },
 
   "page_action": {
