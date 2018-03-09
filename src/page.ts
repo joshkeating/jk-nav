@@ -2,9 +2,9 @@
 export class Page {
 
     private urlRegex: string;
-    private selectors: string[];
+    private selectors: string;
 
-    constructor(urlRegex: string, selectors: string[]) {
+    constructor(urlRegex: string, selectors: string) {
         this.urlRegex = urlRegex;
         this.selectors = selectors;
     }
@@ -18,6 +18,15 @@ export class Page {
     }
 
     setSelectors() {
+
+    }
+
+    matchSite(url: string, allPages: Page[]): boolean {
+        allPages.forEach(element => {
+            let regex: RegExp = new RegExp(this.urlRegex, 'i');
+            return regex.test(url);
+        });
+        return false;
 
     }
 

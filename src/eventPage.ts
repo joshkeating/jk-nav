@@ -15,8 +15,29 @@ import { Page } from './page'
 // event page that stores data and listens for keypresses
 // content script that sends a message to event page as it traverses dom
 
+// let sites = {
+//     'google': {
+//       regex:'^https?://(www\.)?google\.([a-z\.]+)\/(?!reader\/).*$',
+//       selector: 'h3.r>a:nth(*)'
+//     },
+//     'news.ycombinator': {
+//         regex: 'https?://news\.ycombinator\.com\/.*',
+//         selector: '.storylink:nth(*)'
+//     },
+//     'reddit': {
+//       regex: 'https?://(www\.)?reddit\.com\/.*',
+//       selector: '#siteTable div.entry:nth(*) a.title'
+//     }
+// }
 
 // create array of sites
+let allSites: Page[];
+allSites.push(new Page('https?://news\.ycombinator\.com\/.*', '.storylink:nth(*)'));
+allSites.push(new Page('^https?://(www\.)?google\.([a-z\.]+)\/(?!reader\/).*$', 'h3.r>a:nth(*)'));
+allSites.push(new Page('https?://(www\.)?reddit\.com\/.*', '#siteTable div.entry:nth(*) a.title'));
+
+
+
 
 // get current tab
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
