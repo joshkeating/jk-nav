@@ -75,7 +75,7 @@ class Page {
 //     console.log('Settings saved');
 // });
 
-let tmpPage: Page = new Page('https?://news\.ycombinator\.com\/.*', '.storylink:nth(*)');
+let tmpPage: Page = new Page('https?://news\.ycombinator\.com\/.*', '.storylink');
 
 // create array of sites
 // let allSites: Page[] = [];

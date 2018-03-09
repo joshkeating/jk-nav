@@ -13,17 +13,36 @@ function sendURL(): string {
         pattern = response.pattern;
         let currentIndex: number = 0;
 
-        console.log(response.pattern);
+        let currentNode: HTMLElement;
 
-        pattern = setLinkIndex(currentIndex, pattern);
-        // selectLink(currentIndex, pattern);
-        console.log(response.pattern);
+        let allLinks = document.querySelectorAll(pattern) as NodeListOf<HTMLElement>;
+        currentNode = allLinks[currentIndex];
+        currentNode.style.backgroundColor = "#c6dafb";  //TODO: make changable
+        currentNode.focus();
 
+        document.addEventListener("keypress", function onEvent(event) {
+            let previousIndex: number = currentIndex;
+            if (event.key === "j" && currentIndex < allLinks.length - 1) {
+            
+                currentNode = allLinks[currentIndex+=1];
+                allLinks[previousIndex].style.backgroundColor = "inherit";
+                currentNode.style.backgroundColor = "#c6dafb";  //TODO: make changable
+                currentNode.focus();
+            }
+            else if (event.key === "k" && currentIndex > 0) {
+                currentNode = allLinks[currentIndex-=1];
+                allLinks[previousIndex].style.backgroundColor = "inherit";
+                currentNode.style.backgroundColor = "#c6dafb";  //TODO: make changable
+                currentNode.focus();
+                
+            }
+        });
+        
+        function selectLink() {
+            let convetedlink = allLinks[currentIndex] as HTMLElement;
 
-        let link: JQuery<HTMLElement> = $(setLinkIndex(currentIndex, pattern));
-        console.log(link);
-        link.css('background-color', '#4286f4');
-        link.focus();
+        }
+
 
       });
       return pattern;
@@ -41,59 +60,11 @@ function run() {
     }
 
 
-    selectLink(currentIndex, selector);
 
 
-}
-// replace(/}{/g, "}|{");
-function setLinkIndex(index: number, selector: string) {
-    return selector.replace('(*)', ':nth(' + index + ')');
-}
-
-function selectLink(index: number, selector: string): JQuery<HTMLElement> {
-    let previous = null;
-
-    let link: JQuery<HTMLElement> = $(setLinkIndex(index, selector));
-        if (previous) {
-            if (link.get()[0] == previous) {
-                return link;
-            }
-            $(previous).css('background-color', 'inherit');
-        }
-        link.css('background-color', '#4286f4');
-        if (focus) { link.focus(); }
-        previous = link.get()[0];
-        return link;
 }
 
 
 
 sendURL();
 // run();
-
-
-
-
-function catchKeyPress() {
-    if (window == top) {
-        // add the keyboard handler
-        window.addEventListener('keydown', doKeyPress, false);
-    }
-        
-    let jKeyTrigger: number = 74;
-    let kKeyTrigger: number = 75;
-
-    function doKeyPress(e) {
-        // if e.shiftKey is not provided then script will run at all instances of typing "G"
-        if (e.shiftKey && e.keyCode == jKeyTrigger){ 
-            // move the focus down
-        }
-
-        if (e.shiftKey && e.keyCode == kKeyTrigger){ 
-            // move the focus up
-        }
-
-    }
-        
-}
-
