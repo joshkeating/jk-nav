@@ -3,11 +3,11 @@
 class Page {
 
     private urlRegex: string;
-    private selectors: string;
+    private selector: string;
 
     constructor(urlRegex: string, selectors: string) {
         this.urlRegex = urlRegex;
-        this.selectors = selectors;
+        this.selector = selectors;
     }
 
     getUrl() {
@@ -15,7 +15,7 @@ class Page {
     }
 
     getSelectors() {
-        return this.selectors;
+        return this.selector;
     }
 
     setSelectors() {
@@ -106,8 +106,9 @@ let isEnabledFlag: boolean = true;
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (checkSiteValid(request.url) && isEnabledFlag) {
-        sendResponse({pattern: tmpPage.getSelectors});
+        let responseString: string = tmpPage.getSelectors();
+        sendResponse({pattern: responseString});
     }
-    //FIXME: not sure if we want to do astnc here
+    //FIXME: not sure if we want to do async here
     return true;
 });
