@@ -2,23 +2,25 @@
   "manifest_version": 2,
 
   "name": "jk-nav",
-  "description": "This extension allows the user to navigate defined webpages using keyboard shortcuts.",
+  "description": "Allows the user to navigate defined webpages using keyboard shortcuts.",
   "version": "1.0",
 
   "permissions": [
     "tabs",
-    "contextMenus",
     "<all_urls>"
   ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["<put js to inject here>"],
+      "js": ["js/vendor.js", "js/contentScript.js"],
       "run_at": "document_start"
     }
   ],
 
-  "options_page":"options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
 
   "background": {
     "scripts": ["eventPage.js"],
