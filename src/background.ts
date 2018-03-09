@@ -1,4 +1,6 @@
+import { Page } from './page'
 
+// this is going to be the event page
 
 // background goes here
 // use this to To handle key chords 
