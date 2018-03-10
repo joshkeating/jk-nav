@@ -1,6 +1,5 @@
 import * as $ from "jquery";
 
-
 function sendURL() {
 
     let pattern: string;
@@ -43,8 +42,6 @@ function sendURL() {
 
          });
 
-
-       
 
 
       });
