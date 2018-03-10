@@ -13,7 +13,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["js/vendor.js", "js/contentScript.js"],
+      "js": ["jquery-3.3.1.min.js", "js/contentScript.js"],
       "run_at": "document_start"
     }
   ],
@@ -24,7 +24,7 @@
   },
 
   "background": {
-    "scripts": ["js/eventPage.js"],
+    "scripts": ["jquery-3.3.1.min.js", "js/eventPage.js"],
     "persistent": false
   },
 

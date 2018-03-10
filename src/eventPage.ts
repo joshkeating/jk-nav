@@ -78,35 +78,39 @@ class Page {
 let tmpPage: Page = new Page('https?://news\.ycombinator\.com\/.*', '.storylink');
 
 // create array of sites
-// let allSites: Page[] = [];
-// allSites.push(new Page('https?://news\.ycombinator\.com\/.*', '.storylink:nth(*)'));
-// allSites.push(new Page('^https?://(www\.)?google\.([a-z\.]+)\/(?!reader\/).*$', 'h3.r>a:nth(*)'));
-// allSites.push(new Page('https?://(www\.)?reddit\.com\/.*', '#siteTable div.entry:nth(*) a.title'));
+let allSites: Page[] = [];
+allSites.push(new Page('https?://news\.ycombinator\.com\/.*', '.storylink'));
+allSites.push(new Page('^https?://(www\.)?google\.([a-z\.]+)\/(?!reader\/).*$', 'h3.r > a'));
+allSites.push(new Page('https?://(www\.)?reddit\.com\/.*', '#siteTable div.entry a.title'));
 
 
-function checkSiteValid(url: string): boolean {
-        
-        let regex: RegExp = new RegExp(tmpPage.getUrl(), 'i');
+function checkSiteValid(url: string): string {
+
+    for (let index = 0; index < allSites.length; index++) {
+        const element = allSites[index];
+        let regex: RegExp = new RegExp(element.getUrl(), 'i');
 
         if (regex.test(url)) {
-            console.log("great success");
-            return true;
-        } else {
-            console.log("great failure");
-            return false;
-        }
+            // console.log("great success");
+            return element.getSelectors();
+        } 
+        
+    }
+    return null;
+        
 }
 
 let isEnabledFlag: boolean = true;
 
 // need a listener for:
-    // url that we care about
+    // url that we care about [done]
     // page action
      
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (checkSiteValid(request.url) && isEnabledFlag) {
-        let responseString: string = tmpPage.getSelectors();
+        let responseString: string = checkSiteValid(request.url);
+        console.log(responseString);
         sendResponse({pattern: responseString});
     }
     //FIXME: not sure if we want to do async here
