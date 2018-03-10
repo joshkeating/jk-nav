@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "jk-nav",
-  "description": "Allows the user to navigate defined webpages using keyboard shortcuts.",
+  "description": "Allows navigation of defined webpages using keyboard shortcuts.",
   "version": "1.0",
 
   "permissions": [

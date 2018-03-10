@@ -2,23 +2,35 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Getting Started Extension's Popup</title>
+    <title>jk-nav Page Action</title>
     <style>
       body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+        font-family: "Lucida Grande", sans-serif;
+        width: 140px;
+        font-size: 14px;
       }
+      /* TODO: make this css look not aweful */
+      /* label {
+        padding: 25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+        margin-top: 15px;
+        
+      }
+      button {
+        padding: 5px;
+        margin: 15px;
+        text-align: center
+      } */
     </style>
-    <script src="js/vendor.js"></script>
-  </head>
-  <body>
-    <ul style="min-width: 700px;">
-    <li>Current URL: <span id="url"></span></li>
-    <li>Current Time: <span id="time"></span></li>
-    </ul>
-    <button id="countUp">count up</button>
-    <button id="changeBackground">change background</button>
+    <script src="jquery-3.3.1.min.js"></script>
     <script src="js/popup.js"></script>
+  </head>
+
+  <body>
+    <label><input id="checkboxEnabled" type="checkbox"> Toggle</label>
+    <button id="optionsPageLink">Options</button>
   </body>
 </html>
 

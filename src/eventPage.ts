@@ -79,9 +79,22 @@ let isEnabledFlag: boolean = true;
 
 // Listener keeps the event page open until not needed
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    
+    // TODO: handle toggle of the site
+    if (request.action == 'toggle') {
+        //get site, set toggle status
+    }
+
+
+    
     if (checkSiteValid(request.url) && isEnabledFlag) {
+        // show page icon if site is valid
+        chrome.pageAction.show(sender.tab.id);
+
+        
         let responseString: string = checkSiteValid(request.url);
         sendResponse({pattern: responseString});
+
     }
     return true;
 });

@@ -9,6 +9,9 @@ function sendURL() {
         if (!response) {
             return;
         }
+        // send message alerting that this is a valid page
+        // FIXME:
+        chrome.runtime.sendMessage({action: 'displayAction'});   
 
         $(document).ready(function() { 
             pattern = response.pattern;
