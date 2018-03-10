@@ -1,13 +1,14 @@
-// import { Page } from './page';
 
 class Page {
 
     private urlRegex: string;
     private selector: string;
+    private enabled: boolean;
 
-    constructor(urlRegex: string, selectors: string) {
+    constructor(urlRegex: string, selectors: string, enabled: boolean) {
         this.urlRegex = urlRegex;
         this.selector = selectors;
+        this.enabled = enabled;
     }
 
     getUrl() {
@@ -18,8 +19,12 @@ class Page {
         return this.selector;
     }
 
-    setSelectors() {
+    getEnabled() {
+        return this.enabled;
+    }
 
+    setEnabled(isEnabled: boolean) {
+        this.enabled = isEnabled;
     }
 
     matchSite(url: string, allPages: Page[]): boolean {
@@ -53,48 +58,57 @@ class Page {
 
 // create array of sites
 let allSites: Page[] = [];
-allSites.push(new Page('https?://news\.ycombinator\.com\/.*', '.storylink'));
-allSites.push(new Page('^https?://(www\.)?google\.([a-z\.]+)\/(?!reader\/).*$', 'h3.r > a'));
-allSites.push(new Page('https?://(www\.)?reddit\.com\/.*', '#siteTable div.entry a.title'));
-allSites.push(new Page('https?://arstechnica\.com\/.*', 'h2 > a'));
+allSites.push(new Page('https?://news\.ycombinator\.com\/.*', '.storylink', true));
+allSites.push(new Page('^https?://(www\.)?google\.([a-z\.]+)\/(?!reader\/).*$', 'h3.r > a', true));
+allSites.push(new Page('https?://(www\.)?reddit\.com\/.*', '#siteTable div.entry a.title', true));
+allSites.push(new Page('https?://arstechnica\.com\/.*', 'h2 > a', true));
 
-// determines if given url 
+// determines if given url should be acted on
 function checkSiteValid(url: string): string {
     for (let index = 0; index < allSites.length; index++) {
-        const element = allSites[index];
+        const element: Page = allSites[index];
         let regex: RegExp = new RegExp(element.getUrl(), 'i');
         if (regex.test(url)) {
             return element.getSelectors();
-        } 
+        }
     }
     return null;
 }
 
-let isEnabledFlag: boolean = true;
 
-// need a listener for:
-    // url that we care about [done]
-    // page action
-     
+function getSite(url: string): number {
+    for (let index = 0; index < allSites.length; index++) {
+        const element: Page = allSites[index];
+        let regex: RegExp = new RegExp(element.getUrl(), 'i');
+        if (regex.test(url)) {
+            return index;
+        } 
+    }
+}
+
 
 // Listener keeps the event page open until not needed
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     
-    // TODO: handle toggle of the site
-    if (request.action == 'toggle') {
-        //get site, set toggle status
-    }
-
-
-    
-    if (checkSiteValid(request.url) && isEnabledFlag) {
+    if (checkSiteValid(request.url)) {
         // show page icon if site is valid
         chrome.pageAction.show(sender.tab.id);
 
-        
         let responseString: string = checkSiteValid(request.url);
         sendResponse({pattern: responseString});
 
+        // // TODO: handle toggle of the site
+        // send url over to popup
+        // chrome.runtime.sendMessage({thisSite: allSites[getSite(request.url)]});
+        // if (request.cmd == 'toggle') {
+        //     allSites[getSite(request.url)].setEnabled(request.enabled);
+        //     chrome.runtime.sendMessage({temp: allSites[getSite(request.url)].getEnabled()});
+        //     chrome.tabs.executeScript(request.url, {code: 'location.reload()'}, function() {});
+        // } else {
+        //     let responseString: string = checkSiteValid(request.url);
+        //     sendResponse({pattern: responseString});
+        // }
+        
     }
     return true;
 });

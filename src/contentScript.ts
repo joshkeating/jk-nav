@@ -9,10 +9,8 @@ function sendURL() {
         if (!response) {
             return;
         }
-        // send message alerting that this is a valid page
-        // FIXME:
-        chrome.runtime.sendMessage({action: 'displayAction'});   
-
+        
+        // wait till DOM is fully loaded to execute
         $(document).ready(function() { 
             pattern = response.pattern;
             let currentIndex: number = 0;
@@ -48,6 +46,4 @@ function sendURL() {
 }
 
 
-
 sendURL();
-// run();

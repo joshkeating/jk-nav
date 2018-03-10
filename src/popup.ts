@@ -1,32 +1,34 @@
 import * as $ from 'jquery';
 
 // this is the page action popup
-
-  
-// $(function() {
-
-//     $('#optionsPageLink').click(() => {
-//         chrome.runtime.openOptionsPage()
-//     });
-
-// });
     
 function handleInput() {
+    
+    let checkbox = document.querySelector('#checkboxEnabled') as HTMLInputElement; 
+
+    // FIXME: failed enable/disable code
+    // chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    //     if (request.thisSite.getEnabled() === true) {
+    //         checkbox.checked = true;
+    //     } else {
+    //         checkbox.checked = false;
+    //     }
+    //     chrome.tabs.executeScript(request.url, {code: 'location.reload()'}, function() {});
+    // });
 
     // handle checkbox click 
-    let checkbox = document.querySelector('#checkboxEnabled') as HTMLInputElement; 
     if (checkbox) {
         checkbox.addEventListener('click', function() {
             if (checkbox.checked) {
-                chrome.runtime.sendMessage({action: 'toggle', enabled: true})
+                chrome.runtime.sendMessage({cmd: 'toggle', enabled: true});
             } else {
-                chrome.runtime.sendMessage({action: 'toggle', enabled: false})
+                chrome.runtime.sendMessage({cmd: 'toggle', enabled: false});
             }
             
         });
     }
     
-
+    // handle options button click 
     let optionButton = document.querySelector('#optionsPageLink');
     if (optionButton) {
         optionButton.addEventListener('click', function() {
@@ -36,8 +38,6 @@ function handleInput() {
             }
         });
     }
-    // handle options button click 
-    
       
 }
 
