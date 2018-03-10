@@ -1,7 +1,5 @@
 # jk-nav
 
-*** 
-
 _Developer: Joshua Keating_
 
 ## What Does This Do?
