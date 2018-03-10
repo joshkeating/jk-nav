@@ -39,10 +39,7 @@ function sendURL() {
                 }
             });
 
-
          });
-
-
 
       });
 }
