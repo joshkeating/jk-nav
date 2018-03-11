@@ -26,36 +26,19 @@ class Page {
     setEnabled(isEnabled: boolean) {
         this.enabled = isEnabled;
     }
-
-    matchSite(url: string, allPages: Page[]): boolean {
-        allPages.forEach(element => {
-            let regex: RegExp = new RegExp(this.urlRegex, 'i');
-            return regex.test(url);
-        });
-        return false;
-
-    }
 }
 
-// Alright I think this is actually how it needs to work
+// Future goals and notes
 // ====================================================
-// content script needs to send message to the event page
-// event page then decides what to do with that page depending on the page
+// TODO: toggle activation of extension through popup
+// TODO: allow editing of default sites through options page
+// TODO: allow addition of new pages and rules through options page
+// TODO: add Page array data into synced storage
 // ====================================================
 
 chrome.runtime.onInstalled.addListener(function(obj) {
     chrome.storage.sync.set({'currentColor': '#c6dafb'}, function() {});
 });
-
-// TODO: eventually needs to handle toggling active sites
-
-
-// --- extension plan ---
-// page action with checkbox that enables/disables running on that page
-// page action also has link to options.html page
-// event page that stores data and listens for keypresses
-// content script that sends a message to event page as it traverses dom
-
 
 
 // create array of sites
@@ -77,17 +60,15 @@ function checkSiteValid(url: string): string {
     return null;
 }
 
-
-function getSite(url: string): number {
-    for (let index = 0; index < allSites.length; index++) {
-        const element: Page = allSites[index];
-        let regex: RegExp = new RegExp(element.getUrl(), 'i');
-        if (regex.test(url)) {
-            return index;
-        } 
-    }
-}
-
+// function getSite(url: string): number {
+//     for (let index = 0; index < allSites.length; index++) {
+//         const element: Page = allSites[index];
+//         let regex: RegExp = new RegExp(element.getUrl(), 'i');
+//         if (regex.test(url)) {
+//             return index;
+//         } 
+//     }
+// }
 
 // Listener keeps the event page open until not needed
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
