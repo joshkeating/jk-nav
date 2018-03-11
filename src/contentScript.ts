@@ -7,7 +7,6 @@ chrome.storage.sync.get("currentColor", function (obj) {
     color = obj.currentColor;
     console.log(color);
 });
-    
 
 function sendURL() {
 
@@ -34,7 +33,7 @@ function sendURL() {
             document.addEventListener("keypress", function onEvent(event) {
                 let previousIndex: number = currentIndex;
                 if (event.key === "j" && currentIndex < allLinks.length - 1) {
-                
+                    
                     currentNode = allLinks[currentIndex+=1];
                     allLinks[previousIndex].style.backgroundColor = "inherit";
                     currentNode.style.backgroundColor = color;
@@ -45,7 +44,6 @@ function sendURL() {
                     allLinks[previousIndex].style.backgroundColor = "inherit";
                     currentNode.style.backgroundColor = color;
                     currentNode.focus();
-                    
                 }
             });
 
