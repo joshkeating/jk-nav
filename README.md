@@ -3,13 +3,43 @@
 _Developer: Joshua Keating_
 
 ## What Does This Do?
- - Explanation of the extension 
+
+#### _Because who likes moving the mouse anyway?_
+For those fond of vim keybindings, this allows you to navigate select links using the `j` and `k` keys. This is intended to be used primarily on sites that feature lists of links. This means that it works particularly well on content aggregator sites like [Hacker News](https://news.ycombinator.com) or [Reddit](https://www.reddit.com/).
+
+In the future I'd like to extend the functionality to include more keys on the homerow.
 
 
 ## Installation
- - How to install
 
+#### Dependencies
+
+ - Node
+ - npm
+
+#### Setup
+
+ - Clone repository
+ - Navigate to directory
+ - Run the following commands:
+```
+npm install
+npm run build
+```
+
+To add to Chrome as an extension, load the `/build` directory on the [extensions](chrome://extensions/) page.
 
 ## How To Use It
- - How to use
  
+ - Use the `j` and `k` keys to traverse through lists of links on selected sites.
+ - Change the color of the selector in the options page.
+ - Enable / disable on a site by site basis _(broken at the moment)_.
+ 
+#### Currently Supported Sites
+
+ These domains and their subdomains should all work.
+
+ - Google: any search result.
+ - [Hacker News](https://news.ycombinator.com)
+ - [Reddit](https://www.reddit.com/)
+ - [Ars Technica](https://arstechnica.com/)
