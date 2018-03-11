@@ -1,5 +1,36 @@
 import * as $ from "jquery";
 
+// chrome.runtime.onInstalled.addListener(function() {
+//     chrome.storage.sync.set({'currentColor': '#c6dafb'}, function() {});
+// });
+
+// function init() {
+//     chrome.storage.sync.set({'currentColor': '#c6dafb'}, function() {});
+// }
+
+// init();
+// chrome.storage.sync.set({'currentColor': '#c6dafb'}, function() {});
+
+// function fuck() {
+//     chrome.storage.sync.set({'currentColor': '#c6dafb'}, function() {
+//         console.log("fuck this");
+//     });
+
+// }
+// fuck();
+
+    let color: string;
+
+    chrome.storage.sync.get("currentColor", function (obj) {
+        color = obj.currentColor;
+        console.log(color);
+    });
+    
+
+
+    
+
+
 function sendURL() {
 
     let pattern: string;
@@ -19,7 +50,7 @@ function sendURL() {
     
             let allLinks = document.querySelectorAll(pattern) as NodeListOf<HTMLElement>;
             currentNode = allLinks[currentIndex];
-            currentNode.style.backgroundColor = "#c6dafb";  //TODO: make changable
+            currentNode.style.backgroundColor = color;  //TODO: make changable
             currentNode.focus();
     
             document.addEventListener("keypress", function onEvent(event) {
@@ -28,13 +59,13 @@ function sendURL() {
                 
                     currentNode = allLinks[currentIndex+=1];
                     allLinks[previousIndex].style.backgroundColor = "inherit";
-                    currentNode.style.backgroundColor = "#c6dafb";  //TODO: make changable
+                    currentNode.style.backgroundColor = color;  //TODO: make changable
                     currentNode.focus();
                 }
                 else if (event.key === "k" && currentIndex > 0) {
                     currentNode = allLinks[currentIndex-=1];
                     allLinks[previousIndex].style.backgroundColor = "inherit";
-                    currentNode.style.backgroundColor = "#c6dafb";  //TODO: make changable
+                    currentNode.style.backgroundColor = color;  //TODO: make changable
                     currentNode.focus();
                     
                 }
@@ -44,6 +75,5 @@ function sendURL() {
 
       });
 }
-
 
 sendURL();

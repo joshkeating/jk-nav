@@ -43,7 +43,9 @@ class Page {
 // event page then decides what to do with that page depending on the page
 // ====================================================
 
-
+chrome.runtime.onInstalled.addListener(function(obj) {
+    chrome.storage.sync.set({'currentColor': '#800000'}, function() {});
+});
 
 // TODO: eventually needs to handle toggling active sites
 
