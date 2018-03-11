@@ -5,7 +5,6 @@ let color: string;
 // retrieve current link highlight color 
 chrome.storage.sync.get("currentColor", function (obj) {
     color = obj.currentColor;
-    console.log(color);
 });
 
 function sendURL() {
@@ -19,7 +18,7 @@ function sendURL() {
         }
         
         // wait till DOM is fully loaded to execute
-        $(document).ready(function() { 
+        $(document).ready(function() {
             pattern = response.pattern;
             let currentIndex: number = 0;
     
@@ -33,7 +32,7 @@ function sendURL() {
             document.addEventListener("keypress", function onEvent(event) {
                 let previousIndex: number = currentIndex;
                 if (event.key === "j" && currentIndex < allLinks.length - 1) {
-                    
+
                     currentNode = allLinks[currentIndex+=1];
                     allLinks[previousIndex].style.backgroundColor = "inherit";
                     currentNode.style.backgroundColor = color;
